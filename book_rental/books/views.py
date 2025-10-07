@@ -6,6 +6,8 @@ from django.db.models.fields import return_None
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader, RequestContext
+from rest_framework import viewsets
+from .serializers import BooksSerializer
 from .models import Books
 
 
@@ -39,3 +41,9 @@ def test(request):
 
 def home(request):
     return render(request, 'Home.html')
+
+class BooksViewSet(viewsets.ModelViewSet):
+    queryset = Books.objects.all()
+    serializer_class = BooksSerializer
+
+

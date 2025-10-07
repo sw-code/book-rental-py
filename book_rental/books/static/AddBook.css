@@ -1,0 +1,238 @@
+:root { /* Or scope to your form container, e.g., .form-container */
+  --form-label-color: #000000;
+  --form-label-weight: bold;
+  --form-label-width: 30%; /* For inline layout */
+  --form-field-spacing: 10px;
+  --form-input-bg: #ffffff;
+  --form-input-text: #1f2937;
+  --form-input-border: #d1d5db;
+  --form-input-border-width: 1px;
+  --form-input-border-radius: 6px;
+  --form-input-padding-v: 10px;
+  --form-input-padding-h: 12px;
+  --form-input-focus-border: #4f46e5;
+  --form-input-focus-shadow: 0 0 0 3px #4f46e540; /* Add alpha for shadow */
+  --form-button-bg: #fcfdfe;
+  --form-button-text: #000000;
+  --form-button-padding-v: 10px;
+  --form-button-padding-h: 24px;
+  --form-button-border-radius: 6px;
+  --form-button-weight: bold;
+  --form-required-color: #dc2626; /* Example: red-600 */
+}
+
+/* --- Base Form Styling --- */
+.form-container {
+  width: 100%; /* Takes available width */
+  max-width: 600px; /* Sensible default max-width */
+  margin: 0 auto; /* Center the form */
+  box-sizing: border-box; /* Ensure padding doesn't expand container */
+}
+
+.form-title {
+  margin-bottom: calc(var(--form-field-spacing)px * 1.5); /* More space after title */
+  font-size: 1.5em; /* Larger title */
+  font-weight: bold;
+  color: var(--form-label-color);
+  text-align: center; /* Center title */
+}
+
+.form-field {
+  margin-bottom: var(--form-field-spacing)px;
+}
+/* Remove margin from the last field */
+.form-container > .form-field:last-child {
+    margin-bottom: 0;
+}
+
+
+.form-label {
+  display: block;
+  margin-bottom: 6px; /* Consistent spacing below label */
+  color: var(--form-label-color);
+  font-weight: var(--form-label-weight);
+  font-size: 0.9em;
+  line-height: 1.4;
+  cursor: default; /* Default cursor for labels */
+}
+
+.required-indicator {
+  color: var(--form-required-color);
+  margin-left: 4px;
+  font-weight: bold;
+}
+
+/* General Input Styling (Text, Email, Password, etc., Textarea, Select) */
+.form-input,
+.form-textarea,
+.form-select {
+  display: block;
+  width: 100%;
+  padding: var(--form-input-padding-v)px var(--form-input-padding-h)px;
+  background-color: var(--form-input-bg);
+  color: var(--form-input-text);
+  border: var(--form-input-border-width)px solid var(--form-input-border);
+  border-radius: var(--form-input-border-radius)px;
+  font-size: 1em;
+  line-height: 1.5;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  box-sizing: border-box;
+}
+
+/* Specific overrides */
+.form-textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.form-select {
+  appearance: none; /* Remove default dropdown arrow */
+  background-position: right var(--form-input-padding-h)px center;
+  background-repeat: no-repeat;
+  background-size: 1.2em 1.2em;
+  padding-right: calc(var(--form-input-padding-h)px * 2 + 1.2em); /* Make space for arrow */
+}
+
+/* Focus States */
+.form-input:focus,
+.form-textarea:focus,
+.form-select:focus {
+  border-color: var(--form-input-focus-border);
+  outline: 0;
+  box-shadow: var(--form-input-focus-shadow);
+}
+
+/* --- Checkbox & Radio Specifics --- */
+.form-checkbox-wrapper,
+.form-radio-wrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px; /* Spacing between options */
+}
+.form-checkbox-wrapper:last-child,
+.form-radio-group .form-radio-wrapper:last-child { /* Target last radio wrapper inside group */
+  margin-bottom: 0;
+}
+
+.form-input.form-checkbox,
+.form-input.form-radio {
+  display: inline-block;
+  width: auto; /* Reset width */
+  height: auto; /* Reset height */
+  margin-top: 0.2em; /* Align better with text */
+  margin-right: 8px;
+  flex-shrink: 0;
+  vertical-align: middle; /* Align vertically */
+  cursor: pointer;
+  /* Consider adding custom styles here */
+  appearance: none; /* Base for custom styles */
+  background-color: var(--form-input-bg);
+  border: var(--form-input-border-width)px solid var(--form-input-border);
+  padding: 0; /* Remove padding */
+  width: 1.1em; /* Custom size */
+  height: 1.1em; /* Custom size */
+  position: relative;
+}
+.form-input.form-checkbox {
+  border-radius: var(--form-input-border-radius)px * 0.5; /* Slightly less round */
+}
+.form-input.form-radio {
+  border-radius: 50%; /* Round */
+}
+
+/* Custom checkmark/dot */
+.form-input.form-checkbox:checked::before {
+  content: '';
+  display: block;
+  width: 0.6em;
+  height: 0.6em;
+  background-color: var(--form-button-bg);
+  border-radius: 2px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.form-input.form-radio:checked::before {
+  content: '';
+  display: block;
+  width: 0.6em;
+  height: 0.6em;
+  background-color: var(--form-button-bg);
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.form-input.form-checkbox:focus,
+.form-input.form-radio:focus {
+   /* Apply focus styles */
+   border-color: var(--form-input-focus-border);
+   box-shadow: var(--form-input-focus-shadow);
+}
+
+
+.form-label-checkbox,
+.form-label-radio {
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: normal; /* Options usually normal weight */
+  cursor: pointer;
+  line-height: 1.5; /* Match input line-height */
+  vertical-align: middle;
+}
+
+/* Radio Group Fieldset */
+.form-radio-group {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+.form-label-group { /* Legend styling */
+  margin-bottom: 10px;
+  font-weight: var(--form-label-weight);
+  color: var(--form-label-color);
+  font-size: 0.9em;
+  padding: 0; /* Remove default padding */
+}
+
+
+/* --- Button Styling --- */
+.form-button {
+  display: inline-block;
+  padding: var(--form-button-padding-v)px var(--form-button-padding-h)px;
+  background-color: var(--form-button-bg);
+  color: var(--form-button-text);
+  border: none;
+  border-radius: var(--form-button-border-radius)px;
+  font-weight: var(--form-button-weight);
+  font-size: 1em;
+  line-height: 1.5;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.15s ease-in-out, opacity 0.15s ease-in-out;
+  text-decoration: none; /* Remove underline */
+}
+
+.form-button:hover {
+  opacity: 0.9;
+}
+
+.form-button-reset {
+  background-color: #6b7280; /* Example: gray-500 */
+  color: #ffffff;
+}
+.form-button-reset:hover {
+  background-color: #4b5563; /* Example: gray-600 */
+  opacity: 1;
+}
+
+/* Container for buttons */
+.form-field-buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: flex-start; /* Align buttons left by default */
+}

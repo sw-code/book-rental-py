@@ -1,0 +1,46 @@
+
+{% extends "master.html" %}
+{% block title %}
+    Create new Book
+{% endblock %}
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'AddBook.css' %}">
+<div class="form-container">
+    {% csrf_token %}
+  <h2 class="form-title">Add a book</h2>
+  <div class="form-field form-field-text">
+<label class="form-label">Book Name<span class="required-indicator">*</span></label>
+  <input type="text"  name="BookName" id="name" required class="form-input form-input-text">
+</div>
+  <div class="form-field form-field-textarea">
+<label  class="form-label">Book Description<span class="required-indicator">*</span></label>
+  <textarea name="BookDescription" required rows="10" id="buch" class="form-input form-textarea"></textarea>
+</div>
+  <div class="form-field form-field-buttons">
+    <div class="form-field form-field-submit">
+  <button class="form-button form-button-submit" onclick="postdata()">Submit Form</button>
+</div>
+  </div>
+</div>
+<script src="{% static 'PostCall.js' %}"></script>
+<script>
+    function postdata(){
+        let name = document.getElementById("name").value;
+        let buch = document.getElementById("buch").value;
+        if (name && buch){
+            asyncPostCall(name, buch);
+            document.getElementById("name").value = "";
+            document.getElementById("buch").value = "";
+        }
+
+    }
+
+</script>
+
+{% endblock %}
+
+
+
+
