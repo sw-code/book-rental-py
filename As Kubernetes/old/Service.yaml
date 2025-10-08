@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: db # MARK B
+  #namespace: wordpress-tutorial # Match with namespace
+spec:
+  type: ClusterIP
+  ports:
+  - port: 5432 # MARK B.1
+    targetPort: 5432 # Must match with containerPort
+    protocol: TCP
+  selector:
+    app: postgres # Must match with `MARK A` in mysql/deployment.yaml
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: django-service
+  #namespace: django-cluster # Match with namespace
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 8000 # Port that publicly exposed to internet
+    targetPort: 8000 # Match with MARK C.1
+    protocol: TCP
+  selector:
+    app: django # Match with MARK C
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: adminer-service
+  #namespace: django-cluster # Match with namespace
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 8080 # Port that publicly exposed to internet
+    targetPort: 8080 # Match with MARK C.1
+    protocol: TCP
+  selector:
+    app: adminer # Match with MARK C

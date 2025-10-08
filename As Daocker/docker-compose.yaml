@@ -1,0 +1,40 @@
+services:
+  django:
+    #build: .
+    image: django-immage
+    restart: always
+    ports:
+      - 8000:8000
+    networks:
+      - web
+    depends_on:
+      db:
+        condition: service_started
+
+  db:
+    image: postgres
+    restart: always
+    ports:
+      - 5432:5432
+    networks:
+      - web
+    environment:
+      POSTGRES_PASSWORD: example1234
+      POSTGRES_DB: DB
+    volumes:
+      - pgdata:/var/lib/postgrsql/data
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+volumes:
+  pgdata:
+
+networks:
+  web:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.host_binding_ipv4: "127.0.0.1"

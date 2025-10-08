@@ -1,0 +1,33 @@
+python manage.py runserver  für test server  wichtig DEBUG = True, damit die statischen Inhalte laden.
+
+für die statischen Inhalte: https://whitenoise.readthedocs.io/en/stable/   |  https://www.hostinger.com/tutorials/django-static-files
+python manage.py collectstatic damit die aktuellen Daten im staticfilestorun Ordner sind.
+
+für prod https://docs.djangoproject.com/en/5.2/howto/deployment/asgi/hypercorn/ kann auch WSGI
+hypercorn --bind '0.0.0.0:8000' book_rental.wsgi:application zum testen
+
+docker compose up um das docker image zu bauen und starten
+
+
+python manage.py makemigrations
+python manage.py migrate
+
+aktuell:
+https://www.w3schools.com/django/django_db_postgresql_intro.php
+
+
+kubernetes:
+https://medium.com/@taweesoft/chapter-1-how-to-easily-deploy-your-web-on-kubernetes-83209a8618be
+
+https://www.postgresql.org/docs/current/different-replication-solutions.html laptop = server xd
+
+nette infos:
+https://code.djangoproject.com/ticket/32379
+https://docs.djangoproject.com/en/5.2/ref/settings/#std-setting-STATIC_ROOT
+https://docs.docker.com/compose/gettingstarted/#step-2-define-services-in-a-compose-file
+https://hub.docker.com/_/python
+
+
+https://kubernetes.io/docs/concepts/storage/persistent-volumes/
+
+sand ca 10

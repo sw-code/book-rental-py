@@ -1,0 +1,27 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  #namespace: django-cluster # Match with namespace
+  name: django # MARK C
+  labels:
+    app: django # MARK C
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: django # MARK C
+  template:
+    metadata:
+      labels:
+        app: django # MARK C
+    spec:
+      containers:
+      - name: django
+        image: hypercorn_deb_false_db_5432 #hypercorn_deb_false_db_5432
+        ports:
+        - containerPort: 8000 # MARK C.1
+        imagePullPolicy: Never
+      restartPolicy: Always
+
+

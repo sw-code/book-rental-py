@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  #namespace: django-cluster # Match with namespace
+  name: django-migrate # MARK C
+  labels:
+    app: django-migrate # MARK C
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: django-migrate # MARK C
+  template:
+    metadata:
+      labels:
+        app: django-migrate # MARK C
+    spec:
+      containers:
+      - name: django-migrate
+        image: django_migrate #hypercorn_deb_false_db_5432
+        imagePullPolicy: Never

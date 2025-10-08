@@ -10,7 +10,10 @@ https://docs.djangoproject.com/en/5.2/howto/deployment/wsgi/
 import os
 
 from django.core.wsgi import get_wsgi_application
+from whitenoise import WhiteNoise
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'book_rental.settings')
 
 application = get_wsgi_application()
+application = WhiteNoise(application, root="/usr/src/book_rental/staticfilestorun")
+#application.add_files("/path/to/more/static/files", prefix="more-files/")

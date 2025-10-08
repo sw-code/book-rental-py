@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  #namespace: django-cluster # match with namespace
+  name: postgres # MARK A
+  labels:
+    app: postgres # MARK A
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres # MARK A
+  template:
+    metadata:
+      labels:
+        app: postgres # MARK A
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:18
+        ports:
+        - containerPort: 5432
+        env:
+          - name: POSTGRES_PASSWORD
+            value: "example1234"
+          - name: POSTGRES_DB
+            value: "DB"
+
+        volumeMounts:
+          - name: django-persistent-storage
+            mountPath: /var/lib/postgresql
+        imagePullPolicy: Never
+      restartPolicy: Always
+      volumes:
+        - name: django-persistent-storage
+          persistentVolumeClaim:
+            claimName: postgres-pvc # MARK Z
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  #namespace: django-cluster # Match with namespace
+  name: adminer # MARK C
+  labels:
+    app: adminer # MARK C
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: adminer # MARK C
+  template:
+    metadata:
+      labels:
+        app: adminer # MARK C
+    spec:
+      containers:
+      - name: adminer
+        image: adminer
+        ports:
+        - containerPort: 8080 # MARK C.1
+        imagePullPolicy: Always
+      restartPolicy: Always

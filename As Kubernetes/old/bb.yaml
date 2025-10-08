@@ -1,0 +1,152 @@
+#apiVersion: apps/v1
+## namespace.yamlapiVersion: v1
+#kind: Namespace
+#metadata:
+#  name: django-cluster # This can be anything you want.
+#---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+   name: postgres-storage # MARK Z
+   #namespace: django-cluster # Must match with namespace.
+spec:
+   accessModes:
+     - ReadWriteOnce
+   resources:
+     requests:
+       storage: 10Gi
+---
+
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  #namespace: django-cluster # match with namespace
+  name: postgres # MARK A
+  labels:
+    app: postgres # MARK A
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres # MARK A
+  template:
+    metadata:
+      labels:
+        app: postgres # MARK A
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:18
+        ports:
+        - containerPort: 5432
+        env:
+          - name: POSTGRES_PASSWORD
+            value: "example1234"
+          - name: POSTGRES_DB
+            value: "DB"
+
+        volumeMounts:
+          - name: django-persistent-storage
+            mountPath: /var/lib/postgres/data
+        imagePullPolicy: Never
+      restartPolicy: Always
+      volumes:
+        - name: django-persistent-storage
+          persistentVolumeClaim:
+            claimName: postgres-storage # MARK Z
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  #namespace: django-cluster # Match with namespace
+  name: django # MARK C
+  labels:
+    app: django # MARK C
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: django # MARK C
+  template:
+    metadata:
+      labels:
+        app: django # MARK C
+    spec:
+      containers:
+      - name: django
+        image: hypercorn_deb_false_db_5432 #hypercorn_deb_false_db_5432
+        ports:
+        - containerPort: 8000 # MARK C.1
+        imagePullPolicy: Never
+      restartPolicy: Always
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  #namespace: django-cluster # Match with namespace
+  name: adminer # MARK C
+  labels:
+    app: adminer # MARK C
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: adminer # MARK C
+  template:
+    metadata:
+      labels:
+        app: adminer # MARK C
+    spec:
+      containers:
+      - name: adminer
+        image: adminer
+        ports:
+        - containerPort: 8080 # MARK C.1
+        imagePullPolicy: Always
+      restartPolicy: Always
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: db # MARK B
+  #namespace: wordpress-tutorial # Match with namespace
+spec:
+  type: ClusterIP
+  ports:
+  - port: 5432 # MARK B.1
+    targetPort: 5432 # Must match with containerPort
+    protocol: TCP
+  selector:
+    app: postgres # Must match with `MARK A` in mysql/deployment.yaml
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: django-service
+  #namespace: django-cluster # Match with namespace
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 8000 # Port that publicly exposed to internet
+    targetPort: 8000 # Match with MARK C.1
+    protocol: TCP
+  selector:
+    app: django # Match with MARK C
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: adminer-service
+  #namespace: django-cluster # Match with namespace
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 8080 # Port that publicly exposed to internet
+    targetPort: 8080 # Match with MARK C.1
+    protocol: TCP
+  selector:
+    app: adminer # Match with MARK C
