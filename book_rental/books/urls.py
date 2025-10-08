@@ -7,7 +7,6 @@ from .views import BooksViewSet
 router = DefaultRouter()
 router.register(r'api/books', BooksViewSet)
 
-
 urlpatterns = [
     path('books/', views.books, name='books'),
     path('books/details/<int:id>', views.details, name='details'),
