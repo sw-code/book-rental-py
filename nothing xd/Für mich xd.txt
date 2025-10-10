@@ -12,7 +12,7 @@ docker compose up um das docker image zu bauen und starten
 python manage.py makemigrations
 python manage.py migrate
 
-aktuell:
+
 https://www.w3schools.com/django/django_db_postgresql_intro.php
 
 

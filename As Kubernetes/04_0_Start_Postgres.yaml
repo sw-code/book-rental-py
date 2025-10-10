@@ -18,6 +18,7 @@ spec:
       containers:
       - name: postgres
         image: postgres:18
+        imagePullPolicy: Always
         ports:
         - containerPort: 5432
         env:
@@ -29,7 +30,7 @@ spec:
         volumeMounts:
           - name: django-persistent-storage
             mountPath: /var/lib/postgresql
-        imagePullPolicy: Never
+
       restartPolicy: Always
       volumes:
         - name: django-persistent-storage
