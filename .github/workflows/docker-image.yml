@@ -15,4 +15,4 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Build the Docker image
-      run: docker build ../book_rental/ --file Dockerfile --tag test_immage:$(date +%s)
+      run: docker build ../../book_rental/ --file ../../book_rental/Dockerfile --tag test_immage:$(date +%s)
