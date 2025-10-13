@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '35dbsa7$%gf$c9w^u@0freg(ka1m69d+)&xxf(nq1druBIL/"300382H"9fkmpp3993*Ä293jd3j8z7gF&§(GHZHBP$)/H/(HG12ßüümrH/8g3bm33ffv)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1' , '10.0.10.134', '10.0.19.20', '10.0.129.60', 'fabian.swcode.io']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1' , '10.0.10.134', 'fabian.swcode.io']
 
 
 # Application definition

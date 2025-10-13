@@ -1,7 +1,7 @@
 services:
   django:
     #build: .
-    image: django-immage
+    image: ghcr.io/sw-code/book-rental-py:main
     restart: always
     ports:
       - 8000:8000
