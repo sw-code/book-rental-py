@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: django
-        image: django-immage #hypercorn_deb_false_db_5432
+        image: ghcr.io/sw-code/book-rental-py:main #django-immage #hypercorn_deb_false_db_5432
         ports:
         - containerPort: 8000 # MARK C.1
         imagePullPolicy: Never
