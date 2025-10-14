@@ -31,3 +31,25 @@ https://hub.docker.com/_/python
 https://kubernetes.io/docs/concepts/storage/persistent-volumes/
 
 sand ca 10
+
+
+https://spacelift.io/blog/kubernetes-ingress === https://medium.com/@muppedaanvesh/deploying-nginx-on-kubernetes-a-quick-guide-04d533414967
+einfach gleich
+
+
+https://docs.azure.cn/en-us/aks/ingress-static-ip?tabs=azure-cli
+https://cert-manager.io/docs/tutorials/acme/nginx-ingress/
+
+
+certs:
+
+https://cert-manager.io/docs/usage/ingress/
+https://cert-manager.io/docs/configuration/acme/dns01/
+cert-manager.io/docs/installation/
+https://maxanuj.medium.com/how-to-configure-ingress-tls-ssl-certificates-in-kubernetes-cedafb29dd48
+vhttps://medium.com/avmconsulting-blog/how-to-secure-applications-on-kubernetes-ssl-tls-certificates-8f7f5751d788
+https://devopscube.com/create-self-signed-certificates-openssl/
+https://devopscube.com/create-self-signed-certificates-openssl/
+https://devopscube.com/kubernetes-ingress-tutorial/
+https://devopscube.com/setup-ingress-kubernetes-nginx-controller/
+https://medium.com/@muppedaanvesh/%EF%B8%8F-kubernetes-ingress-securing-the-ingress-using-cert-manager-part-7-366f1f127fd6

@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-   name: postgres-storage-prod
+   name: postgres-storage
    namespace: prod
 spec:
   accessModes:
@@ -10,7 +10,7 @@ spec:
     storage: 1Gi
   storageClassName: standard
   hostPath:
-    path: /tmp/prod
+    path: /tmp/TestVolume
 ---
 
 apiVersion: v1
@@ -25,4 +25,4 @@ spec:
     requests:
       storage: 1Gi
   storageClassName: standard
-  volumeName: postgres-storage-prod
+  volumeName: postgres-storage

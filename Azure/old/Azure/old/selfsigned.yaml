@@ -1,0 +1,7 @@
+# clusterissuer-selfsigned.yaml
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: selfsigned
+spec:
+  selfSigned: {}
