@@ -19,12 +19,16 @@ jobs:
       - uses: actions/checkout@v5
       - name: Make the script files executable
         run: chmod +x start.sh stop.sh
-      - name: Run the scripts
-        env:
-          KUBE_CONFIG: ${{ secrets.KUBE_S_TEST }}
-        run: |
+
+      - uses: azure/k8s-set-context@v4
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBE_CONFIG }}
+
+      - run: |
           ./stop.sh
           ./start.sh
+
 
       - uses: actions-hub/kubectl@master
         with:
