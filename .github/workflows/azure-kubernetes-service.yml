@@ -1,6 +1,6 @@
 on:
   workflow_run:
-    workflows: ["docker-publish"]
+    workflows: ["Build"]
     types: [requested]
 
 jobs:    
