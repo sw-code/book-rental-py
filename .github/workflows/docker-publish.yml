@@ -98,18 +98,6 @@ jobs:
         # against the sigstore community Fulcio instance.
         run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
 
-  deploy:
-    name: Deploy
-    runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions-hub/kubectl@master
-        env:
-          KUBE_CONFIG: ${{ secrets.KUBE_S_TEST }}
-
-      - uses: actions-hub/kubectl@master
-        with:
-          args: get pods -n prod
 
 
