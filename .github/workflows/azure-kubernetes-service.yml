@@ -17,3 +17,7 @@ jobs:
       - uses: actions-hub/kubectl@master
         with:
           args: get pods -n prod
+
+      - uses: actions-hub/kubectl@master
+        with:
+          args: get pods -n ingress-nginx
