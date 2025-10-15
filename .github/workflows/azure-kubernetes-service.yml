@@ -1,0 +1,19 @@
+on:
+  workflow_run:
+    workflows: ["docker-publish"]
+    types: [requested]
+
+jobs:    
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions-hub/kubectl@master
+        env:
+          KUBE_CONFIG: ${{ secrets.KUBE_S_TEST }}
+
+      - uses: actions-hub/kubectl@master
+        with:
+          args: get pods -n prod
