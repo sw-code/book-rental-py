@@ -7,17 +7,24 @@ jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
-
+    defaults:
+      run:
+        working-directory: ./Azure
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG: ${{ secrets.KUBE_S_TEST }}
+
+      - uses: actions/checkout@v5
+      - name: Make the script files executable
+        run: chmod +x start.sh stop.sh
+      - name: Run the scripts
+        run: |
+          ./stop.sh
+          ./start.sh
 
       - uses: actions-hub/kubectl@master
         with:
           args: get pods -n prod
 
-      - uses: actions-hub/kubectl@master
-        with:
-          args: get pods -n ingress-nginx
