@@ -12,11 +12,6 @@ jobs:
         working-directory: ./Azure
     steps:
       - uses: actions/checkout@v5
-      - uses: actions-hub/kubectl@master
-        env:
-          KUBE_CONFIG: ${{ secrets.KUBE_S_TEST }}
-
-      - uses: actions/checkout@v5
       - name: Make the script files executable
         run: chmod +x start.sh stop.sh
 
@@ -29,8 +24,9 @@ jobs:
           ./stop.sh
           ./start.sh
 
-
       - uses: actions-hub/kubectl@master
+        env:
+          KUBE_CONFIG: ${{ secrets.KUBE_S_TEST }}
         with:
           args: get pods -n prod
 
