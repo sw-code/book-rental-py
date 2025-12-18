@@ -3,7 +3,7 @@
 
 	//"dockerComposeFile": "../Docker/docker-compose.yaml",
 	//"service": "django",
-	"workspaceFolder": "/",
+	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
 	"features": {
     	"ghcr.io/devcontainers/features/node:1": {}
 	},
