@@ -1,8 +1,8 @@
 {
 	"name": "Test Docker",
 
-	"dockerComposeFile": "../Docker/docker-compose.yaml",
-	"service": "django",
+	//"dockerComposeFile": "../Docker/docker-compose.yaml",
+	//"service": "django",
 	"workspaceFolder": "/",
 	"features": {
 		"ghcr.io/davzucky/devcontainers-features-wolfi/bash:1": {},
