@@ -5,7 +5,6 @@
 	//"service": "django",
 	"workspaceFolder": "/",
 	"features": {
-		"ghcr.io/davzucky/devcontainers-features-wolfi/bash:1": {},
     	"ghcr.io/devcontainers/features/node:1": {}
 	},
 	"forwardPorts": [
